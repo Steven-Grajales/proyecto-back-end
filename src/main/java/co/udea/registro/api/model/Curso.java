@@ -20,6 +20,9 @@ public class Curso {
     @NotNull
     private String semestre;
 
+    @NotNull
+    private String horario;
+
     @JoinColumn(name = "docente", nullable = false)
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Docente docente;
@@ -32,12 +35,13 @@ public class Curso {
 
     public Curso() {}
 
-    public Curso(String codigo, String nombre, String estado, String semestre, Docente docente) {
+    public Curso(String codigo, String nombre, String estado, String semestre, Docente docente, String horario) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.estado = estado;
         this.semestre = semestre;
         this.docente = docente;
+        this.horario = horario;
     }
 
     public String getCodigo() {
@@ -80,4 +84,27 @@ public class Curso {
         this.docente = docente;
     }
 
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public List<Actividad> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(List<Actividad> actividades) {
+        this.actividades = actividades;
+    }
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
 }
