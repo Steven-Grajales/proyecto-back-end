@@ -22,7 +22,7 @@ public class CursoService {
 
     public List<CursoWrapper> getCursos() {
         List<CursoWrapper> cursos = new ArrayList<CursoWrapper>();
-        for(Curso curso: cursoRepository.findAll()){
+        for(Curso curso: cursoRepository.findAllByEstado("activo")){
             cursos.add(new CursoWrapper(curso));
         }
         return cursos;
