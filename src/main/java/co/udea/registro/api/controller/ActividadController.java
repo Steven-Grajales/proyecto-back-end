@@ -38,6 +38,17 @@ public class ActividadController {
         return ResponseEntity.ok(actividadService.getActividades());
     }
 
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Buscar actividades de un curso", response = Page.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Las actividades fueron encontradas", response = Page.class),
+            @ApiResponse(code = 404, message = "No se encontraron las actividades"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public ResponseEntity<List<ActividadWrapper>> actividadesDeCurso(@PathVariable String id){
+        log.info("RESTapi: Buscar actividades de un curso");
+        return ResponseEntity.ok(actividadService.actividadesDeCurso(id));
+    }
+
     @PostMapping
     @ApiOperation(value = "Registrar una actividad", response = Page.class)
     @ApiResponses(value = {

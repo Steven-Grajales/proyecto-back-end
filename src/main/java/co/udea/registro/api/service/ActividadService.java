@@ -49,4 +49,12 @@ public class ActividadService {
                 docenteRepository.getOne(actividad.getDocente()), cursoRepository.getOne(actividad.getCurso()))));
     }
 
+    public List<ActividadWrapper> actividadesDeCurso(String id){
+        List<ActividadWrapper> actividades = new ArrayList<ActividadWrapper>();
+        for(Actividad actividad: actividadRepository.actividadesDeCurso(id)){
+            actividades.add(new ActividadWrapper(actividad));
+        }
+        return actividades;
+    }
+
 }
