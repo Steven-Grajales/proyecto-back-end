@@ -2,7 +2,7 @@ package co.udea.registro.api.service;
 
 import co.udea.registro.api.model.Curso;
 import co.udea.registro.api.repository.CursoRepository;
-import co.udea.registro.api.util.CursoWrapper;
+import co.udea.registro.api.model.CursoWrapper;
 import co.udea.registro.api.util.Messages;
 import org.springframework.stereotype.Service;
 

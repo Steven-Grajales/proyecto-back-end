@@ -1,10 +1,8 @@
-package co.udea.registro.api.util;
-
-import co.udea.registro.api.model.Actividad;
+package co.udea.registro.api.model;
 
 public class ActividadWrapper {
 
-    private String codigo;
+    private int codigo;
     private String estado;
     private String curso;
     private String docente;
@@ -12,6 +10,9 @@ public class ActividadWrapper {
     private String duracion;
     private String semestre;
     private String descripcion;
+    private String tipo;
+
+    public ActividadWrapper(){}
 
     public ActividadWrapper(Actividad actividad){
         this.codigo = actividad.getId();
@@ -22,13 +23,14 @@ public class ActividadWrapper {
         this.duracion = actividad.getDuracion();
         this.semestre = actividad.getSemestre();
         this.descripcion = actividad.getDescripcion();
+        this.tipo = actividad.getTipo();
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -86,5 +88,13 @@ public class ActividadWrapper {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

@@ -1,8 +1,7 @@
 package co.udea.registro.api.controller;
 
-import co.udea.registro.api.model.Curso;
 import co.udea.registro.api.service.CursoService;
-import co.udea.registro.api.util.CursoWrapper;
+import co.udea.registro.api.model.CursoWrapper;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
