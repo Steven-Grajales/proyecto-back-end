@@ -1,5 +1,6 @@
 package co.udea.registro.api.service;
 
+import co.udea.registro.api.exception.DataNotFoundException;
 import co.udea.registro.api.exception.InvalidDateException;
 import co.udea.registro.api.exception.MissDataException;
 import co.udea.registro.api.model.Actividad;
@@ -12,10 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ActividadService {
@@ -63,6 +61,16 @@ public class ActividadService {
         return actividades;
     }
 
+    public ActividadWrapper eliminarActividad(int id) {
+        Optional<Actividad> actividad = actividadRepository.findById(id);
+        if(!actividad.isPresent()){
+            throw new DataNotFoundException(messages.get("exception.not_found.activity"));
+        }
+
+        actividad.get().setEstado("inactiva");
+        return new ActividadWrapper(actividadRepository.save(actividad.get()));
+    }
+
     private void validarCampos(ActividadWrapper actividad) throws ParseException {
         if(actividad.getSemestre().isEmpty() || actividad.getDuracion() == 0 || actividad.getCurso().isEmpty() ||
             actividad.getDescripcion().isEmpty() || actividad.getDocente().isEmpty() || actividad.getTipo().isEmpty()){
@@ -76,5 +84,6 @@ public class ActividadService {
             throw new InvalidDateException(messages.get("exception.invalid_date.activity"));
         }
     }
+
 
 }

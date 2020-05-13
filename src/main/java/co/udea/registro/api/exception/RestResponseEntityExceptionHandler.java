@@ -29,6 +29,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return new ResponseEntity<>( ex.getMessage(), HttpStatus.EXPECTATION_FAILED);
     }
 
+    @ExceptionHandler({DataNotFoundException.class})
+    protected ResponseEntity handleDataNotFoundException(
+            HttpServletRequest request, DataNotFoundException ex) {
+        logger.error(request.getRequestURL().toString(), ex);
+        return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(Throwable.class)
     protected ResponseEntity handleUnhandledException(
             HttpServletRequest request, Throwable ex) {

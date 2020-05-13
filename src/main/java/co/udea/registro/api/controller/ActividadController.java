@@ -53,11 +53,21 @@ public class ActividadController {
     @ApiOperation(value = "Registrar una actividad", response = Page.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La actividad fue registrada", response = Page.class),
-            @ApiResponse(code = 404, message = "No se pude registrar la actividad"),
+            @ApiResponse(code = 404, message = "No se pudo registrar la actividad"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
     public ResponseEntity<ActividadWrapper> registrarActividad(@RequestBody ActividadWrapper actividad) throws ParseException {
         log.info("RESTapi: Registrar una actividad");
         return ResponseEntity.ok(actividadService.registrarActividad(actividad));
     }
 
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Eliminar una actividad (estado inactiva)", response = Page.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La actividad fue eliminada", response = Page.class),
+            @ApiResponse(code = 404, message = "No se pudo eliminar la actividad"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public ResponseEntity<ActividadWrapper> eliminarActividad(@PathVariable int id) {
+        log.info("RESTapi: Eliminar una actividad");
+        return ResponseEntity.ok(actividadService.eliminarActividad(id));
+    }
 }
