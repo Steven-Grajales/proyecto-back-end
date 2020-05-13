@@ -14,14 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final Logger logger = LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
-    /*
-    @ExceptionHandler({BusinessException.class})
-    protected ResponseEntity handleBusinessException(
-            HttpServletRequest request, BusinessException ex) {
+
+    @ExceptionHandler({MissDataException.class})
+    protected ResponseEntity handleMissDataException(
+            HttpServletRequest request, MissDataException ex) {
         logger.error(request.getRequestURL().toString(), ex);
-        return new ResponseEntity<>( ex.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity<>( ex.getMessage(), HttpStatus.EXPECTATION_FAILED);
     }
-    */
+
+    @ExceptionHandler({InvalidDateException.class})
+    protected ResponseEntity handleInvalidDateException(
+            HttpServletRequest request, InvalidDateException ex) {
+        logger.error(request.getRequestURL().toString(), ex);
+        return new ResponseEntity<>( ex.getMessage(), HttpStatus.EXPECTATION_FAILED);
+    }
 
     @ExceptionHandler(Throwable.class)
     protected ResponseEntity handleUnhandledException(

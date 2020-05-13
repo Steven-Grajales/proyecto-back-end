@@ -7,7 +7,7 @@ public class ActividadWrapper {
     private String curso;
     private String docente;
     private String fecha;
-    private String duracion;
+    private int duracion;
     private String semestre;
     private String descripcion;
     private String tipo;
@@ -66,11 +66,11 @@ public class ActividadWrapper {
         this.fecha = fecha;
     }
 
-    public String getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(String duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 
