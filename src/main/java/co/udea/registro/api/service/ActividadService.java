@@ -34,7 +34,7 @@ public class ActividadService {
 
     public List<ActividadWrapper> getActividades(){
         List<ActividadWrapper> actividades = new ArrayList<ActividadWrapper>();
-        for(Actividad actividad: actividadRepository.findAll()){
+        for(Actividad actividad: actividadRepository.findAllByEstado("activa")){
             actividades.add(new ActividadWrapper(actividad));
         }
         return actividades;

@@ -17,4 +17,6 @@ public interface ActividadRepository extends JpaRepository<Actividad, Integer> {
     @Query("select a from Actividad a where a.curso.codigo = ?1")
     List<Actividad> actividadesDeCurso(String id);
 
+    List<Actividad> findAllByEstado(String estado);
+
 }
