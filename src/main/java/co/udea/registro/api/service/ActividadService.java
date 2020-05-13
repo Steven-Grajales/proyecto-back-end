@@ -48,6 +48,7 @@ public class ActividadService {
         }catch(Exception e){
            actividad.setCodigo(1);
         }
+        actividad.setEstado("activa");
 
         return new ActividadWrapper(actividadRepository.save(new Actividad(actividad.getCodigo(), actividad.getSemestre(), actividad.getDuracion(),
                 new SimpleDateFormat("yyyy-MM-dd").parse(actividad.getFecha()), actividad.getDescripcion(), actividad.getTipo(), actividad.getEstado(),
@@ -64,8 +65,7 @@ public class ActividadService {
 
     private void validarCampos(ActividadWrapper actividad) throws ParseException {
         if(actividad.getSemestre().isEmpty() || actividad.getDuracion() == 0 || actividad.getCurso().isEmpty() ||
-            actividad.getDescripcion().isEmpty() || actividad.getDocente().isEmpty() || actividad.getTipo().isEmpty() ||
-            actividad.getEstado().isEmpty()){
+            actividad.getDescripcion().isEmpty() || actividad.getDocente().isEmpty() || actividad.getTipo().isEmpty()){
             throw new MissDataException(messages.get("exception.miss_data.activity"));
         }
 
