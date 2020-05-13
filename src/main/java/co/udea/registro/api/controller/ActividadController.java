@@ -70,4 +70,15 @@ public class ActividadController {
         log.info("RESTapi: Eliminar una actividad");
         return ResponseEntity.ok(actividadService.eliminarActividad(id));
     }
+
+    @PutMapping
+    @ApiOperation(value = "Actualizar una actividad", response = Page.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La actividad fue actualizada", response = Page.class),
+            @ApiResponse(code = 404, message = "No se pudo actualizar la actividad"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public ResponseEntity<ActividadWrapper> actualizarActividad(@RequestBody ActividadWrapper actividad) throws ParseException {
+        log.info("RESTapi: Actualizar una actividad");
+        return ResponseEntity.ok(actividadService.actulizarActividad(actividad));
+    }
 }

@@ -48,9 +48,7 @@ public class ActividadService {
         }
         actividad.setEstado("activa");
 
-        return new ActividadWrapper(actividadRepository.save(new Actividad(actividad.getCodigo(), actividad.getSemestre(), actividad.getDuracion(),
-                new SimpleDateFormat("yyyy-MM-dd").parse(actividad.getFecha()), actividad.getDescripcion(), actividad.getTipo(), actividad.getEstado(),
-                docenteRepository.getOne(actividad.getDocente()), cursoRepository.getOne(actividad.getCurso()))));
+        return new ActividadWrapper(actividadRepository.save(parseActividad(actividad)));
     }
 
     public List<ActividadWrapper> actividadesDeCurso(String id){
@@ -71,6 +69,15 @@ public class ActividadService {
         return new ActividadWrapper(actividadRepository.save(actividad.get()));
     }
 
+    public ActividadWrapper actulizarActividad(ActividadWrapper actividad) throws ParseException {
+        Optional<Actividad> actividadTemp = actividadRepository.findById(actividad.getCodigo());
+        if(!actividadTemp.isPresent()){
+            throw new DataNotFoundException(messages.get("exception.not_found.activity"));
+        }
+
+        return new ActividadWrapper(actividadRepository.save(parseActividad(actividad)));
+    }
+
     private void validarCampos(ActividadWrapper actividad) throws ParseException {
         if(actividad.getSemestre().isEmpty() || actividad.getDuracion() == 0 || actividad.getCurso().isEmpty() ||
             actividad.getDescripcion().isEmpty() || actividad.getDocente().isEmpty() || actividad.getTipo().isEmpty()){
@@ -85,5 +92,10 @@ public class ActividadService {
         }
     }
 
-
+    private Actividad parseActividad(ActividadWrapper actividad) throws ParseException {
+        return new Actividad(actividad.getCodigo(), actividad.getSemestre(), actividad.getDuracion(),
+                    new SimpleDateFormat("yyyy-MM-dd").parse(actividad.getFecha()), actividad.getDescripcion(),
+                    actividad.getTipo(), actividad.getEstado(), docenteRepository.getOne(actividad.getDocente()),
+                    cursoRepository.getOne(actividad.getCurso()));
+    }
 }
