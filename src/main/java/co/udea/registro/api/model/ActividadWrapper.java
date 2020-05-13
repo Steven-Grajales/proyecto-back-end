@@ -1,5 +1,10 @@
 package co.udea.registro.api.model;
 
+import org.apache.tomcat.jni.Local;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 public class ActividadWrapper {
 
     private int codigo;
@@ -19,11 +24,12 @@ public class ActividadWrapper {
         this.estado = actividad.getEstado();
         this.curso = actividad.getCurso().getCodigo() + " - " + actividad.getCurso().getNombre();
         this.docente = actividad.getDocente().getNombre();
-        this.fecha = actividad.getFecha().toString();
         this.duracion = actividad.getDuracion();
         this.semestre = actividad.getSemestre();
         this.descripcion = actividad.getDescripcion();
         this.tipo = actividad.getTipo();
+        LocalDate fecha = actividad.getFecha().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        this.fecha = fecha.getDayOfMonth() + "/" + fecha.getMonthValue() + "/" + fecha.getYear();
     }
 
     public int getCodigo() {
