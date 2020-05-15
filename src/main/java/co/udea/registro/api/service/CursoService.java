@@ -1,5 +1,6 @@
 package co.udea.registro.api.service;
 
+import co.udea.registro.api.exception.DataNotFoundException;
 import co.udea.registro.api.model.Curso;
 import co.udea.registro.api.repository.CursoRepository;
 import co.udea.registro.api.model.CursoWrapper;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CursoService {
@@ -26,5 +28,14 @@ public class CursoService {
             cursos.add(new CursoWrapper(curso));
         }
         return cursos;
+    }
+
+    public CursoWrapper consultarCurso(String codigo) {
+        Optional<Curso> curso = cursoRepository.findById(codigo);
+        if(!curso.isPresent()){
+            throw new DataNotFoundException(messages.get("exception.not_found.course"));
+        }
+
+        return new CursoWrapper(curso.get());
     }
 }
