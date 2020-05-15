@@ -9,13 +9,13 @@ import java.util.Date;
 public class Actividad {
 
     @Id
-    private String id;
+    private int id;
 
     @NotNull
     private String semestre;
 
     @NotNull
-    private String duracion;
+    private int duracion;
 
     @NotNull
     private Date fecha;
@@ -40,7 +40,7 @@ public class Actividad {
     public Actividad() {
     }
 
-    public Actividad(String id, String semestre, String duracion, Date fecha, String descripcion, String tipo,
+    public Actividad(int id, String semestre, int duracion, Date fecha, String descripcion, String tipo,
                      String estado, Docente docente, Curso curso) {
         this.id = id;
         this.semestre = semestre;
@@ -53,11 +53,11 @@ public class Actividad {
         this.curso = curso;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,11 +69,11 @@ public class Actividad {
         this.semestre = semestre;
     }
 
-    public String getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(String duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 

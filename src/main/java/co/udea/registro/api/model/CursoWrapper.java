@@ -1,6 +1,4 @@
-package co.udea.registro.api.util;
-
-import co.udea.registro.api.model.Curso;
+package co.udea.registro.api.model;
 
 public class CursoWrapper {
 
