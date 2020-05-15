@@ -98,4 +98,13 @@ public class ActividadService {
                     actividad.getTipo(), actividad.getEstado(), docenteRepository.getOne(actividad.getDocente()),
                     cursoRepository.getOne(actividad.getCurso()));
     }
+
+    public ActividadWrapper consultarActividad(int id) {
+        Optional<Actividad> actividad = actividadRepository.findById(id);
+        if(!actividad.isPresent()){
+            throw new DataNotFoundException(messages.get("exception.not_found.activity"));
+        }
+
+        return new ActividadWrapper(actividad.get());
+    }
 }

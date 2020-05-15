@@ -38,7 +38,7 @@ public class ActividadController {
         return ResponseEntity.ok(actividadService.getActividades());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("curso/{id}")
     @ApiOperation(value = "Buscar actividades de un curso", response = Page.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Las actividades fueron encontradas", response = Page.class),
@@ -47,6 +47,17 @@ public class ActividadController {
     public ResponseEntity<List<ActividadWrapper>> actividadesDeCurso(@PathVariable String id){
         log.info("RESTapi: Buscar actividades de un curso");
         return ResponseEntity.ok(actividadService.actividadesDeCurso(id));
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Buscar actividad", response = Page.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Las actividad fue encontrada", response = Page.class),
+            @ApiResponse(code = 404, message = "No se encontró la actividad"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public ResponseEntity<ActividadWrapper> consultarActividad(@PathVariable int id){
+        log.info("RESTapi: Buscar actividad");
+        return ResponseEntity.ok(actividadService.consultarActividad(id));
     }
 
     @PostMapping
@@ -60,7 +71,7 @@ public class ActividadController {
         return ResponseEntity.ok(actividadService.registrarActividad(actividad));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation(value = "Eliminar una actividad (estado inactiva)", response = Page.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La actividad fue eliminada", response = Page.class),

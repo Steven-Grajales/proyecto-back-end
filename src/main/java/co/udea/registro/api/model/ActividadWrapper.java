@@ -23,7 +23,7 @@ public class ActividadWrapper {
         this.codigo = actividad.getId();
         this.estado = actividad.getEstado();
         this.curso = actividad.getCurso().getCodigo() + " - " + actividad.getCurso().getNombre();
-        this.docente = actividad.getDocente().getNombre();
+        this.docente = actividad.getDocente().getId() + " - " + actividad.getDocente().getNombre();
         this.duracion = actividad.getDuracion();
         this.semestre = actividad.getSemestre();
         this.descripcion = actividad.getDescripcion();
