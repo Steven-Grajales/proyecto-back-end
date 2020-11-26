@@ -21,7 +21,7 @@ public class ActividadControllerTest {
 
     @Test
     public void testConsultarActividad (){
-        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
         ResponseEntity<String> actual = restTemplate.exchange(
                 createURLWithPort("registro-api/actividades/2"),
