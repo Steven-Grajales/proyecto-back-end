@@ -1,13 +1,14 @@
 package co.udea.registro.api.controller;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 public class CursoControllerTest {
@@ -20,6 +21,7 @@ public class CursoControllerTest {
 
     @Test
     public void testConsultarCurso (){
+
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
         ResponseEntity<String> actual = restTemplate.exchange(
@@ -28,7 +30,8 @@ public class CursoControllerTest {
 
         String expected = "{\"codigo\":\"1\",\"nombre\":\"Química\",\"horario\":\"MJ 14-16\",\"totalEstudiantes\":1}";
 
-        Assert.assertEquals(expected, actual.getBody());
+        assertThat(expected).isEqualTo(actual.getBody()) ;
+
     }
 
     private String createURLWithPort(String uri) {
