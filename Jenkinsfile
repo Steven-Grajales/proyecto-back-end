@@ -7,14 +7,14 @@ pipeline {
         stage('Instalacion y compilacion') {
             steps {
 				withMaven(maven : 'maven-3.6.3'){
-					bat 'mvn -B -DskipTests clean package'
+					sh 'mvn -B -DskipTests clean package'
 				}
             }
         }
         stage('Ejecucion de pruebas unitarias e integracion') {
             steps {
 				withMaven(maven : 'maven-3.6.3'){
-					bat 'mvn test'
+					sh 'mvn test'
 				}
             }
             post {
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar-server') {
 					withMaven(maven : 'maven-3.6.3'){
-						bat 'mvn sonar:sonar'
+						sh 'mvn sonar:sonar'
 					}
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
         stage('Nexus: Generacion de artefacto') {
             steps {
 				withMaven(maven : 'maven-3.6.3'){
-					bat 'mvn clean deploy -P release'
+					sh 'mvn clean deploy -P release'
 				}
             }
         }
