@@ -33,6 +33,12 @@ pipeline {
                 }
             }
         }
-        
+        stage('Deploy') {
+            steps {
+				withMaven(maven : 'maven-3.6.3'){
+					bat 'mvn clean deploy -P release'
+				}
+            }
+        }
     }
 }
